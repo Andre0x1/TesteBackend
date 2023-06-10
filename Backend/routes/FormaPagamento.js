@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const FormaPagamento = require("../models/FormaPagamento");
+const FormaPagamento = require("../models/FormaPagamento/FormaPagamento");
 
 router.post("/", async (req, res) => {
   try {

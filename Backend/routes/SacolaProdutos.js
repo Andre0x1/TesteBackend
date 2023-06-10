@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const ListaProdutos = require("../models/Sacola_Produto/Sacola_Produtos");
+const SacolaProdutos = require("../models/Sacola_Produto/Sacola_Produtos");
 
 router.post("/", async (req, res) => {
   try {
     const { idLista, idProduto } = req.body;
-    const newItem = new ListaProdutos({ idLista, idProduto });
+    const newItem = new SacolaProdutos({ idLista, idProduto });
     await newItem.save();
     res.status(201).json(newItem);
   } catch (error) {
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const Listas = await ListaProdutos.find();
+    const Listas = await SacolaProdutos.find();
     res.json(Listas);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter Listas" });
@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
 router.get("/produtos/:idLista", async (req, res) => {
   try {
     const { idLista } = req.params.id;
-    const Listas = await ListaProdutos.find({ idLista });
+    const Listas = await SacolaProdutos.find({ idLista });
     res.json(Listas);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter produtos da lista" });
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const lista = await ListaProdutos.findById(id);
+    const lista = await SacolaProdutos.findById(id);
 
     if (!lista) {
       return res.status(404).json({ error: "Lista não encontrada" });
@@ -53,7 +53,7 @@ router.put("/:id", async (req, res) => {
   const { idLista, idProduto } = req.body;
 
   try {
-    const lista = await ListaProdutos.findByIdAndUpdate(
+    const lista = await SacolaProdutos.findByIdAndUpdate(
       id,
       { idLista, idProduto },
       { new: true }
@@ -73,7 +73,7 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const lista = await ListaProdutos.findByIdAndDelete(id);
+    const lista = await SacolaProdutos.findByIdAndDelete(id);
 
     if (!lista) {
       return res.status(404).json({ error: "Lista não encontrada" });
