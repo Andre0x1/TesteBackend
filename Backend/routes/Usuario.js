@@ -1,12 +1,5 @@
-const express = require("express");
-const router = express.Router();
-const Usuario = require("../models/Usuario/Usuario");
-const Sacola = require("../models/Sacola/Sacola");
-const bcrypt = require("bcrypt");
-
 router.post("/register", async (req, res) => {
-  const { nome, password, dataNascimento, email } = req.body;
-
+  const { nome, password, dataNascimento, email, endereco } = req.body;
   try {
     const existingUsuario = await Usuario.findOne({ email });
 
@@ -22,15 +15,35 @@ router.post("/register", async (req, res) => {
       email,
       password: hashedPassword,
     });
+
     await newUsuario.save();
 
-    const userId = newUsuario._id;
+    try {
+      const newSacola = new Sacola({
+        idUsuario: newUsuario._id,
+      });
 
-    const SacolaUser = new Sacola({
-      userId,
-    });
+      await newSacola.save();
+    } catch (error) {
+      res.status(206).json({ error: "Erro ao registrar o Sacola do usuario." });
+    }
+    try {
+      if (endereco) {
+        const newEndereco = new Endereco({
+          idUsuario: newUsuario._id,
+          rua: endereco.rua,
+          cidade: endereco.cidade,
+          estado: endereco.estado,
+          cep: endereco.cep,
+        });
 
-    await SacolaUser.save();
+        await newEndereco.save();
+      }
+    } catch (error) {
+      res
+        .status(206)
+        .json({ error: "Erro ao registrar o endereco do usuario." });
+    }
 
     res.status(201).json({ message: "Usuário registrado com sucesso" });
   } catch (error) {

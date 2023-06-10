@@ -6,6 +6,7 @@ const Produto = require("./routes/Produto");
 const Usuario = require("./routes/Usuario");
 const Sacola = require("./routes/Sacola");
 const SacolaProdutos = require("./routes/SacolaProdutos");
+const Endereco = require("./routes/Endereco");
 
 app.use(express.json());
 app.use(cors());
@@ -14,6 +15,7 @@ app.use("/produto/", Produto);
 app.use("/usuario/", Usuario);
 app.use("/sacola/", Sacola);
 app.use("/produtos_sacola/", SacolaProdutos);
+app.use("/endereco/", Endereco);
 
 const PORT = 3000;
 app.listen(PORT, () => {
