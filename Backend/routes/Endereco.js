@@ -36,9 +36,9 @@ router.get("/:id", async (req, res) => {
 
 router.get("/usuario/:id", async (req, res) => {
   try {
-    const { idUsuario } = req.params.id;
-    const enderecos = await Endereco.find({ idUsuario });
-    if (!endereco) {
+    const idUsuario = req.params.id;
+    const enderecos = await Endereco.find({ idUsuario: idUsuario });
+    if (!enderecos) {
       return res.status(404).json({ error: "Endereços não encontrados" });
     }
     res.json(enderecos);

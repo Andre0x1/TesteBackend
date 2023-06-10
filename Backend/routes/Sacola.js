@@ -57,6 +57,8 @@ router.post("/:idSacola/pedido", async (req, res) => {
     pedido.valorTotal = valorTotal;
     await pedido.save();
 
+    await sacolaProdutos.deleteMany({ idSacola });
+
     res.status(201).json(pedido);
   } catch (error) {
     res.status(500).json({ error: "Erro ao criar pedido" });

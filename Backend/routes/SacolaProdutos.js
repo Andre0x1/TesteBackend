@@ -6,7 +6,7 @@ router.post("/", async (req, res) => {
   try {
     const { idLista, idProduto, valor } = req.body;
     const count = await SacolaProdutos.countDocuments({ idLista });
-    const tamanhoMaximo = 20;
+    const tamanhoMaximo = 3;
 
     if (count >= tamanhoMaximo) {
       return res.status(400).json({ error: "A sacola está cheia" });
