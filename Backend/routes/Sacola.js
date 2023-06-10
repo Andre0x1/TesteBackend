@@ -28,13 +28,34 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/lists/", async (req, res) => {
+router.get("/lists/:id", async (req, res) => {
   try {
-    const { idUsuario } = req.query;
+    const { idUsuario } = req.params.id;
     const Sacolas = await Sacola.find({ idUsuario });
     res.json(Sacolas);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter Sacolas do usuario" });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { tamanho } = req.body;
+
+  try {
+    const sacola = await Sacola.findByIdAndUpdate(
+      id,
+      { tamanho },
+      { new: true }
+    );
+
+    if (!sacola) {
+      return res.status(404).json({ error: "Sacola não encontrada" });
+    }
+
+    res.json(sacola);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao atualizar Sacola" });
   }
 });
 

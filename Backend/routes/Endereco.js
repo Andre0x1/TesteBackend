@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Endereco = require("../models/Endereco");
+const Endereco = require("../models/Endereco/Endereco");
 
 router.post("/", async (req, res) => {
   try {
@@ -36,7 +36,8 @@ router.get("/:id", async (req, res) => {
 
 router.get("/usuario/:id", async (req, res) => {
   try {
-    const enderecos = await Endereco.find(req.params.id);
+    const { idUsuario } = req.params.id;
+    const enderecos = await Endereco.find({ idUsuario });
     if (!endereco) {
       return res.status(404).json({ error: "Endereços não encontrados" });
     }

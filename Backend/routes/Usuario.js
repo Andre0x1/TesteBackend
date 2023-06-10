@@ -1,3 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const Usuario = require("../models/Usuario/Usuario");
+const Sacola = require("../models/Sacola/Sacola");
+const Endereco = require("../models/Endereco/Endereco");
+const bcrypt = require("bcrypt");
+
 router.post("/register", async (req, res) => {
   const { nome, password, dataNascimento, email, endereco } = req.body;
   try {
@@ -18,9 +25,11 @@ router.post("/register", async (req, res) => {
 
     await newUsuario.save();
 
+    const Usuarioid = newUsuario._id;
+
     try {
       const newSacola = new Sacola({
-        idUsuario: newUsuario._id,
+        idUsuario: Usuarioid,
       });
 
       await newSacola.save();
@@ -30,11 +39,12 @@ router.post("/register", async (req, res) => {
     try {
       if (endereco) {
         const newEndereco = new Endereco({
-          idUsuario: newUsuario._id,
+          idUsuario: Usuarioid,
           rua: endereco.rua,
           cidade: endereco.cidade,
           estado: endereco.estado,
           cep: endereco.cep,
+          isPrincipal: true,
         });
 
         await newEndereco.save();
@@ -84,6 +94,77 @@ router.post("/login", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "Erro ao realizar a autenticação" });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nome, password, dataNascimento, email, endereco } = req.body;
+
+  try {
+    const usuario = await Usuario.findByIdAndUpdate(
+      id,
+      {
+        nome,
+        dataNascimento,
+        email,
+      },
+      { new: true }
+    );
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      usuario.password = hashedPassword;
+      await usuario.save();
+    }
+
+    if (endereco) {
+      const { rua, cidade, estado, cep } = endereco;
+      const enderecoAtualizado = await Endereco.findOneAndUpdate(
+        { idUsuario: id },
+        { rua, cidade, estado, cep },
+        { new: true }
+      );
+
+      if (!enderecoAtualizado) {
+        const novoEndereco = new Endereco({
+          idUsuario: id,
+          rua,
+          cidade,
+          estado,
+          cep,
+          isPrincipal: true,
+        });
+
+        await novoEndereco.save();
+      }
+    }
+
+    res.json(usuario);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao atualizar usuário" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const usuario = await Usuario.findByIdAndDelete(id);
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    await Endereco.deleteMany({ idUsuario: id });
+
+    res.json({ message: "Usuário excluído com sucesso" });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao excluir usuário" });
   }
 });
 
