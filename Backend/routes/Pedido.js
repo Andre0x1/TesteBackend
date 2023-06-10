@@ -36,7 +36,8 @@ router.get("/:id", async (req, res) => {
 
 router.get("/usuario/:idUsuario", async (req, res) => {
   try {
-    const pedidos = await Pedido.find({ idUsuario: req.params.idUsuario });
+    const idUsuario = req.params.idUsuario;
+    const pedidos = await Pedido.find({ idUsuario: idUsuario });
     res.json(pedidos);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter pedidos do usuário" });

@@ -31,8 +31,8 @@ router.get("/", async (req, res) => {
 
 router.get("/produtos/:idLista", async (req, res) => {
   try {
-    const { idLista } = req.params.id;
-    const Listas = await SacolaProdutos.find({ idLista });
+    const idLista = req.params.id;
+    const Listas = await SacolaProdutos.find({ idLista: idLista });
     res.json(Listas);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter produtos da lista" });
@@ -40,10 +40,8 @@ router.get("/produtos/:idLista", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-
   try {
-    const lista = await SacolaProdutos.findById(id);
+    const lista = await SacolaProdutos.findById(req.params.id);
 
     if (!lista) {
       return res.status(404).json({ error: "Lista não encontrada" });

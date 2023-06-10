@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Sacola = require("../models/Sacola/Sacola");
+const SacolaProduto = require("../models/SacolaProdutos/SacolaProdutos");
 const Pedido = require("../models/Pedido/Pedido");
 const PedidoProduto = require("../models/PedidoProduto/PedidoProduto");
 
@@ -30,7 +31,7 @@ router.post("/:idSacola/pedido", async (req, res) => {
       return res.status(404).json({ error: "Sacola não encontrada" });
     }
 
-    const sacolaProdutos = await SacolaProduto.find({ idSacola });
+    const sacolaProdutos = await SacolaProduto.find({ idSacola: idSacola });
     if (sacolaProdutos.length === 0) {
       return res.status(400).json({ error: "A sacola está vazia" });
     }
@@ -57,7 +58,7 @@ router.post("/:idSacola/pedido", async (req, res) => {
     pedido.valorTotal = valorTotal;
     await pedido.save();
 
-    await sacolaProdutos.deleteMany({ idSacola });
+    await sacolaProdutos.deleteMany({ idSacola: idSacola });
 
     res.status(201).json(pedido);
   } catch (error) {
@@ -76,8 +77,8 @@ router.get("/", async (req, res) => {
 
 router.get("/lists/:id", async (req, res) => {
   try {
-    const { idUsuario } = req.params.id;
-    const Sacolas = await Sacola.find({ idUsuario });
+    const idUsuario = req.params.id;
+    const Sacolas = await Sacola.find({ idUsuario: idUsuario });
     res.json(Sacolas);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter Sacolas do usuario" });

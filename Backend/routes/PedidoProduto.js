@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const PedidoProduto = require("../models/PedidoProduto/PedidoProduto");
 
-router.post("/pedidoproduto", async (req, res) => {
+router.post("/pedidproduto", async (req, res) => {
   try {
     const pedidoProduto = await PedidoProduto.create(req.body);
     res.status(201).json(pedidoProduto);
@@ -13,7 +13,7 @@ router.post("/pedidoproduto", async (req, res) => {
   }
 });
 
-router.get("/pedidoproduto", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const pedidosProdutos = await PedidoProduto.find();
     res.json(pedidosProdutos);
@@ -25,6 +25,18 @@ router.get("/pedidoproduto", async (req, res) => {
 });
 
 router.get("/pedidoproduto/:id", async (req, res) => {
+  const idPedido = req.params.id;
+  try {
+    const pedidosProdutos = await PedidoProduto.find({ idPedido: idPedido });
+    res.json(pedidosProdutos);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Não foi possível obter os pedidos de produtos" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
   try {
     const pedidoProduto = await PedidoProduto.findById(req.params.id);
     if (pedidoProduto) {
@@ -39,7 +51,7 @@ router.get("/pedidoproduto/:id", async (req, res) => {
   }
 });
 
-router.put("/pedidoproduto/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const pedidoProduto = await PedidoProduto.findByIdAndUpdate(
       req.params.id,
@@ -58,7 +70,7 @@ router.put("/pedidoproduto/:id", async (req, res) => {
   }
 });
 
-router.delete("/pedidoproduto/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const pedidoProduto = await PedidoProduto.findByIdAndRemove(req.params.id);
     if (pedidoProduto) {
