@@ -9,6 +9,7 @@ const SacolaProdutos = require("./routes/SacolaProdutos");
 const Endereco = require("./routes/Endereco");
 const FormaPagamento = require("./routes/FormaPagamento");
 const FormaPagamentoUsuario = require("./routes/FormaPagamentoUsuario");
+const Pedido = require("./routes/Pedido");
 
 app.use(express.json());
 app.use(cors());
@@ -20,6 +21,8 @@ app.use("/produtosSacola/", SacolaProdutos);
 app.use("/endereco/", Endereco);
 app.use("/formaPagamento/", FormaPagamento);
 app.use("/formaPagamentoUsuario/", FormaPagamentoUsuario);
+app.use("/pedido/", Pedido);
+//app.use("/pedidoProdutos/", PedidoProdutos);
 
 const PORT = 3000;
 app.listen(PORT, () => {

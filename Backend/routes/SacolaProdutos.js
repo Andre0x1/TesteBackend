@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const SacolaProdutos = require("../models/Sacola_Produto/Sacola_Produtos");
+const SacolaProdutos = require("../models/SacolaProdutos/SacolaProdutos");
 
 router.post("/", async (req, res) => {
   try {
