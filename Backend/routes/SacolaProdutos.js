@@ -4,12 +4,19 @@ const SacolaProdutos = require("../models/Sacola_Produto/Sacola_Produtos");
 
 router.post("/", async (req, res) => {
   try {
-    const { idLista, idProduto } = req.body;
-    const newItem = new SacolaProdutos({ idLista, idProduto });
+    const { idLista, idProduto, valor } = req.body;
+    const count = await SacolaProdutos.countDocuments({ idLista });
+    const tamanhoMaximo = 20;
+
+    if (count >= tamanhoMaximo) {
+      return res.status(400).json({ error: "A sacola está cheia" });
+    }
+
+    const newItem = new SacolaProdutos({ idLista, idProduto, valor });
     await newItem.save();
     res.status(201).json(newItem);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao adicionar produto a Lista" });
+    res.status(500).json({ error: "Erro ao adicionar produto à lista" });
   }
 });
 
@@ -50,12 +57,12 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { idLista, idProduto } = req.body;
+  const { idLista, idProduto, valor } = req.body;
 
   try {
     const lista = await SacolaProdutos.findByIdAndUpdate(
       id,
-      { idLista, idProduto },
+      { idLista, idProduto, valor },
       { new: true }
     );
 
