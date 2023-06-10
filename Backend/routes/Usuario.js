@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Usuario = require("../models/Usuario/Usuario");
-const SacolaUser = require("../models/Sacola/Sacola");
+const Sacola = require("../models/Sacola/Sacola");
 const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res) => {
@@ -24,9 +24,15 @@ router.post("/register", async (req, res) => {
     });
     await newUsuario.save();
 
-    res
-      .status(201)
-      .json({ message: "Usuário registrado com sucesso", id: newUsuario._id });
+    const userId = newUsuario._id;
+
+    const SacolaUser = new Sacola({
+      userId,
+    });
+
+    await SacolaUser.save();
+
+    res.status(201).json({ message: "Usuário registrado com sucesso" });
   } catch (error) {
     res.status(500).json({ error: "Erro ao registrar o usuário" });
   }

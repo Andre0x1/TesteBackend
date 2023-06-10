@@ -4,14 +4,14 @@ const Sacola = require("../models/Sacola/Sacola");
 
 router.post("/", async (req, res) => {
   try {
-    const { idUsuario } = req.body;
+    const { idUsuario, tamanho } = req.body;
 
     const existingSacola = await Sacola.findOne({ idUsuario });
 
     if (existingSacola) {
       return res.status(409).json({ error: "Sacola já existe" });
     }
-    const Sacola = new Sacola({ idUsuario });
+    const Sacola = new Sacola({ idUsuario, tamanho });
     await Sacola.save();
     res.status(201).json(Sacola);
   } catch (error) {
