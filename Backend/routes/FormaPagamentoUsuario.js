@@ -39,6 +39,23 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("usuario/:id", async (req, res) => {
+  try {
+    const idUsuario = req.params.id;
+    const formaPagamento = await FormaPagamentoUsuario.find({
+      idUsuario: idUsuario,
+    });
+    if (!formaPagamento) {
+      return res
+        .status(404)
+        .json({ error: "Forma de pagamento não encontrada" });
+    }
+    res.json(formaPagamento);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao obter Forma de pagamento" });
+  }
+});
+
 router.put("/:id", async (req, res) => {
   try {
     const { idFormaPagamento, idPrincipal } = req.body;

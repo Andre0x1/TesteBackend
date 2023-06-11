@@ -32,11 +32,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/produtos/:idSacola", async (req, res) => {
+router.get("/produtos/:id", async (req, res) => {
   try {
     const idSacola = req.params.id;
     const Sacolas = await SacolaProdutos.find({ idSacola: idSacola });
-    res.json(Sacolas);
+    res.json({ Sacolas });
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter produtos da sacola" });
   }
