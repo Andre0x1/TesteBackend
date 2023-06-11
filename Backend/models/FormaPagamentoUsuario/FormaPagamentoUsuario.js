@@ -4,7 +4,7 @@ const FormaPagamentoUsuarioSchema = new mongoose.Schema(
   {
     idUsuario: { type: String, required: true },
     idFormaPagamento: { type: String, required: true },
-    idPrincipal: { type: String, required: true, default: false },
+    idPrincipal: { type: String, default: false },
   },
   { versionKey: false }
 );

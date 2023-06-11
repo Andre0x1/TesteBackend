@@ -106,14 +106,4 @@ A seguir, estão descritas as principais rotas disponíveis no sistema de delive
 - **GET /formapagamento-usuarios/:id** - Retorna os detalhes de um relacionamento entre uma forma de pagamento e um usuário específicos, com base nos IDs fornecidos.
 - **POST /formapagamento-usuarios** - Cria um novo relacionamento entre uma forma de pagamento e um usuário, com base nos dados fornecidos no corpo da solicitação.
 - **PUT /formapagamento-usuarios/:id** - Atualiza os dados de um relacionamento entre uma forma de pagamento e um usuário específicos, com base no ID fornecido.
-- **DELETE /formapagamento-usuarios/:id** - Exclui um relacionamento entre uma forma de pagamento
-
- e um usuário específicos, com base no ID fornecido.
-
-## Considerações Finais
-
-Este projeto foi desenvolvido utilizando Node.js e MongoDB para criar um backend para um sistema de delivery. As rotas descritas acima permitem a gestão de endereços, produtos, usuários, formas de pagamento, pedidos, sacolas e os relacionamentos entre eles. Certifique-se de ter as dependências instaladas e as variáveis de ambiente configuradas corretamente antes de iniciar o servidor.
-
-Se tiver alguma dúvida ou problema, sinta-se à vontade para entrar em contato com a equipe de desenvolvimento.
-
-Aproveite o sistema de delivery!
+- **DELETE /formapagamento-usuarios/:id** - Exclui um relacionamento entre uma forma de pagamento e um usuário específicos, com base no ID fornecido.

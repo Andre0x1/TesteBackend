@@ -4,8 +4,14 @@ const Pedido = require("../models/Pedido/Pedido");
 
 router.post("/", async (req, res) => {
   try {
-    const { idUsuario, valorTotal, formaPagamento } = req.body;
-    const novoPedido = new Pedido({ idUsuario, valorTotal, formaPagamento });
+    const { idUsuario, valorTotal, idFormaPagamentoUsuario, idEndereco } =
+      req.body;
+    const novoPedido = new Pedido({
+      idUsuario,
+      valorTotal,
+      idFormaPagamentoUsuario,
+      idEndereco,
+    });
     await novoPedido.save();
     res.status(201).json(novoPedido);
   } catch (error) {

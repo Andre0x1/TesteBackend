@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
 router.post("/:idSacola/pedido", async (req, res) => {
   try {
     const idSacola = req.params.idSacola;
-    const { formaPagamento, idEndereco } = req.body;
+    const { idFormaPagamentoUsuario, idEndereco } = req.body;
     const sacola = await Sacola.findById(idSacola);
     if (!sacola) {
       return res.status(404).json({ error: "Sacola não encontrada" });
@@ -46,7 +46,7 @@ router.post("/:idSacola/pedido", async (req, res) => {
       idUsuario: sacola.idUsuario,
       idEndereco: endereco._id,
       valorTotal: 0,
-      formaPagamento: formaPagamento,
+      formaPagamento: idFormaPagamentoUsuario,
     });
     await pedido.save();
 

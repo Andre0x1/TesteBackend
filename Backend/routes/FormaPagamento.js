@@ -6,9 +6,7 @@ router.post("/", async (req, res) => {
   try {
     const { nome, tipo } = req.body;
     const novaFormaPagamento = new FormaPagamento({
-      idUsuario,
       nome,
-      descricao,
       tipo,
     });
     await novaFormaPagamento.save();
@@ -46,7 +44,7 @@ router.put("/:id", async (req, res) => {
     const { nome, tipo } = req.body;
     const formaPagamento = await FormaPagamento.findByIdAndUpdate(
       req.params.id,
-      { idUsuario, nome, descricao, tipo },
+      { nome, tipo },
       { new: true }
     );
     if (!formaPagamento) {

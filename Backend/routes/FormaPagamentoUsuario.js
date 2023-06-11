@@ -1,27 +1,30 @@
 const express = require("express");
 const router = express.Router();
 const FormaPagamentoUsuario = require("../models/FormaPagamentoUsuario/FormaPagamentoUsuario");
+const FormaPagamento = require("../models/FormaPagamento/FormaPagamento");
 
 router.post("/", async (req, res) => {
   try {
     const { idUsuario, idFormaPagamento } = req.body;
-    const FormaPagamentoUsuario = new FormaPagamentoUsuario({
-      idUsuario,
-      idFormaPagamento,
+    const formaPagamentoUsuario = new FormaPagamentoUsuario({
+      idUsuario: idUsuario,
+      idFormaPagamento: idFormaPagamento,
     });
-    await FormaPagamentoUsuario.save();
-    res.status(201).json(FormaPagamentoUsuario);
+    await formaPagamentoUsuario.save();
+    res.status(201).json(formaPagamentoUsuario);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao adicionar Forma de pagamento" });
+    res.status(500).json({ msg: error.msg });
   }
 });
 
 router.get("/", async (req, res) => {
   try {
-    const FormaPagamentoUsuario = await FormaPagamentoUsuario.find();
-    res.json(FormaPagamentoUsuario);
+    const formaPagamentoUsuario = await FormaPagamentoUsuario.find();
+    res.json(formaPagamentoUsuario);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter Forma de pagamento" });
+    res
+      .status(500)
+      .json({ error: "Erro ao obter Forma de pagamento", msg: error.message });
   }
 });
 
