@@ -4,6 +4,7 @@ const Sacola = require("../models/Sacola/Sacola");
 const SacolaProduto = require("../models/SacolaProdutos/SacolaProdutos");
 const Pedido = require("../models/Pedido/Pedido");
 const PedidoProduto = require("../models/PedidoProduto/PedidoProduto");
+const Endereco = require("../models/Endereco/Endereco");
 
 router.post("/", async (req, res) => {
   try {
@@ -25,7 +26,7 @@ router.post("/", async (req, res) => {
 router.post("/:idSacola/pedido", async (req, res) => {
   try {
     const idSacola = req.params.idSacola;
-    const formaPagamento = req.body;
+    const { formaPagamento, idEndereco } = req.body;
     const sacola = await Sacola.findById(idSacola);
     if (!sacola) {
       return res.status(404).json({ error: "Sacola não encontrada" });
@@ -36,10 +37,16 @@ router.post("/:idSacola/pedido", async (req, res) => {
       return res.status(400).json({ error: "A sacola está vazia" });
     }
 
+    const endereco = await Endereco.findById(idEndereco);
+    if (!endereco) {
+      return res.status(404).json({ error: "Endereco não encontrada" });
+    }
+
     const pedido = new Pedido({
       idUsuario: sacola.idUsuario,
+      idEndereco: endereco._id,
       valorTotal: 0,
-      formaPagamento: formaPagamento.formaPagamento,
+      formaPagamento: formaPagamento,
     });
     await pedido.save();
 
@@ -61,9 +68,10 @@ router.post("/:idSacola/pedido", async (req, res) => {
 
     res.status(201).json(pedido);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Erro ao criar pedido", mensagem: error.message });
+    res.status(500).json({
+      error: "Erro ao criar pedido",
+      mensagem: error.message,
+    });
   }
 });
 
