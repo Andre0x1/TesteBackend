@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const PedidoProduto = require("../models/PedidoProduto/PedidoProduto");
 
-router.post("/pedidproduto", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const pedidoProduto = await PedidoProduto.create(req.body);
     res.status(201).json(pedidoProduto);
