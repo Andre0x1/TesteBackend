@@ -35,15 +35,16 @@ A seguir, estão descritas as principais rotas disponíveis no sistema de delive
 
 ### Módulo de Endereço
 
+- **GET /endereco/** - Retorna os detalhes de todos os endereços cadastrados.
 - **GET /endereco/:id** - Retorna os detalhes de um endereço específico com base no ID fornecido.
 - **GET /endereco/usuario/:id** - Retorna os detalhes dos endereços cadastrados de um usuario específico com base no ID fornecido.
-- **GET /endereco/** - Retorna os detalhes de todos os endereçoscadastrados.
 - **POST /endereco** - Cria um novo endereço com base nos dados fornecidos no corpo da solicitação.
 - **PUT /endereco/:id** - Atualiza os dados de um endereço específico com base no ID fornecido.
 - **DELETE /endereco/:id** - Exclui um endereço específico com base no ID fornecido.
 
 ### Módulo de Produto
 
+- **GET /produto/** - Retorna os detalhes de todos os produtos cadastrados.
 - **GET /produto/:id** - Retorna os detalhes de um produto específico com base no ID fornecido.
 - **POST /produto** - Cria um novo produto com base nos dados fornecidos no corpo da solicitação.
 - **PUT /produto/:id** - Atualiza os dados de um produto específico com base no ID fornecido.
@@ -51,23 +52,25 @@ A seguir, estão descritas as principais rotas disponíveis no sistema de delive
 
 ### Módulo de Usuário
 
-- **GET /usuario/:id** - Retorna os detalhes de um usuário específico com base no ID fornecido.
-- **POST /usuario** - Cria um novo usuário com base nos dados fornecidos no corpo da solicitação.
+- **GET /usuario/** - Retorna os detalhes de todos os usuários.
+- **POST /usuario/login** - Verifica se o usuario esta logado no sistema.
+- **POST /usuario/register** - Cria um novo usuário com base nos dados fornecidos no corpo da solicitação.
 - **PUT /usuario/:id** - Atualiza os dados de um usuário específico com base no ID fornecido.
 - **DELETE /usuario/:id** - Exclui um usuário específico com base no ID fornecido.
 
 ### Módulo de Forma de Pagamento
 
-- **GET /forma-pagamento/:id** - Retorna os detalhes de uma forma de pagamento específica com base no ID fornecido.
-- **POST /forma-pagamento** - Cria uma nova forma de pagamento com base nos dados fornecidos no corpo da solicitação.
-- **PUT /forma-pagamento/:id** - Atualiza os dados de uma forma de
-
- pagamento específica com base no ID fornecido.
-- **DELETE /forma-pagamento/:id** - Exclui uma forma de pagamento específica com base no ID fornecido.
+- **GET /formaPagamento/** - Retorna os detalhes de todas as formas de pagamento cadastradas.
+- **GET /formaPagamento/:id** - Retorna os detalhes de uma forma de pagamento específica com base no ID fornecido.
+- **POST /formaPagamento** - Cria uma nova forma de pagamento com base nos dados fornecidos no corpo da solicitação.
+- **PUT /formaPagamento/:id** - Atualiza os dados de uma forma de  pagamento específica com base no ID fornecido.
+- **DELETE /formaPagamento/:id** - Exclui uma forma de pagamento específica com base no ID fornecido.
 
 ### Módulo de Pedido
 
+- **GET /pedido/** - Retorna os detalhes de todos os pedido .
 - **GET /pedido/:id** - Retorna os detalhes de um pedido específico com base no ID fornecido.
+- **GET /pedido/usuario/:idUsuario** - Retorna os detalhes de um pedido de um usuario específico com base no ID fornecido.
 - **POST /pedido** - Cria um novo pedido com base nos dados fornecidos no corpo da solicitação.
 - **PUT /pedido/:id** - Atualiza os dados de um pedido específico com base no ID fornecido.
 - **DELETE /pedido/:id** - Exclui um pedido específico com base no ID fornecido.
@@ -75,9 +78,21 @@ A seguir, estão descritas as principais rotas disponíveis no sistema de delive
 ### Módulo de Sacola
 
 - **GET /sacola/:id** - Retorna os detalhes de uma sacola específica com base no ID fornecido.
+- **GET /sacola/user/:id** - Retorna os detalhes de uma sacola de um usuario específico com base no ID fornecido.
 - **POST /sacola** - Cria uma nova sacola com base nos dados fornecidos no corpo da solicitação.
+- **POST /sacola/:idSacola/pedido** - Cria um novo pedido atraves utilizando todos os produtos salvos na sacola. Esta requisição elimina todos os itens na tabela sacolaprodutos e cria outras duas entidades: pedido e pedidoprodutos. Para cadastrar o pedido é nescessario enviar o idEndereco e o idFormaPagamento no corpo da requisição.
 - **PUT /sacola/:id** - Atualiza os dados de uma sacola específica com base no ID fornecido.
-- **DELETE /sacola/:id** - Exclui uma sacola específica com base no ID fornecido.
+
+
+### Módulo de Sacola-Produtos
+
+
+- **GET /produtosSacola/** - Retorna os detalhes dos produtos vinvulados a uma sacola de um usuario
+- **GET /produtosSacola/:id** - Retorna os detalhes dos produtos vinvulados a uma sacola de um usuario, com base nos IDs fornecidos.
+- **GET /produtosSacola/produtos/:id** - Retorna os detalhes dos produtos vinvulados a uma sacola especifica de um usuario, com base no ID da sacola fornecido fornecidos.
+- **POST /produtosSacola** - Cria um novo produto vinvulado a uma sacola de um usuario, com base nos dados fornecidos no corpo da solicitação.
+- **PUT /produtosSacola/:id** - Atualiza os dados dos produtos vinvulados a uma sacola de um usuario, com base no ID fornecido.
+- **DELETE /produtosSacola/:id** - Exclui os produtos vinvulados a uma sacola de um usuario, com base no ID fornecido.
 
 ### Módulo de Pedidos-Produtos
 
@@ -85,13 +100,6 @@ A seguir, estão descritas as principais rotas disponíveis no sistema de delive
 - **POST /pedidos-produtos** - Cria um novo relacionamento entre um pedido e um produto, com base nos dados fornecidos no corpo da solicitação.
 - **PUT /pedidos-produtos/:id** - Atualiza os dados de um relacionamento entre um pedido e um produto específicos, com base no ID fornecido.
 - **DELETE /pedidos-produtos/:id** - Exclui um relacionamento entre um pedido e um produto específicos, com base no ID fornecido.
-
-### Módulo de Sacola-Produtos
-
-- **GET /sacola-produtos/:id** - Retorna os detalhes de um relacionamento entre uma sacola e um produto específicos, com base nos IDs fornecidos.
-- **POST /sacola-produtos** - Cria um novo relacionamento entre uma sacola e um produto, com base nos dados fornecidos no corpo da solicitação.
-- **PUT /sacola-produtos/:id** - Atualiza os dados de um relacionamento entre uma sacola e um produto específicos, com base no ID fornecido.
-- **DELETE /sacola-produtos/:id** - Exclui um relacionamento entre uma sacola e um produto específicos, com base no ID fornecido.
 
 ### Módulo de Forma de Pagamento-Usuários
 

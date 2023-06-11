@@ -84,10 +84,23 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/lists/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const idUsuario = req.params.id;
-    const Sacolas = await Sacola.find({ idUsuario: idUsuario });
+    const sacola = await Sacola.findById(req.params.id);
+
+    if (!sacola) {
+      return res.status(404).json({ error: "Sacola não encontrado" });
+    }
+
+    res.json(sacola);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao obter Produto" });
+  }
+});
+
+router.get("/user/:id", async (req, res) => {
+  try {
+    const Sacolas = await Sacola.find({ idUsuario: req.params.id });
     res.json(Sacolas);
   } catch (error) {
     res.status(500).json({ error: "Erro ao obter Sacolas do usuario" });
