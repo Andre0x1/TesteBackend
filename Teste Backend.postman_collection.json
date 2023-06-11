@@ -1,0 +1,817 @@
+{
+	"info": {
+		"_postman_id": "4e83d785-6ab4-4915-8da9-825f38575085",
+		"name": "Teste Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27887112"
+	},
+	"item": [
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "PostaProduto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Produto Teste 7\",\r\n    \"preco\": 102.50,\r\n    \"isDisponivel\" : true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produto/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostaProduto Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produto/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Produto Teste 6\",\r\n    \"preco\": 13.50,\r\n    \"isDisponivel\" : false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produto/6484bf9bb32dc31d4e5e220c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								"6484bf9bb32dc31d4e5e220c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/produto/6484922e04e6cf5a854c7cfc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								"6484922e04e6cf5a854c7cfc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "Lista_Produtos Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/endereco/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"endereco",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista_Endereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/endereco/6484baf4a95485a353794f0f",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"endereco",
+								"6484baf4a95485a353794f0f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista_Endereco_By_User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/endereco/usuario/6484baf4a95485a353794f0b",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"endereco",
+								"usuario",
+								"6484baf4a95485a353794f0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostaEndereco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\": \"64850577aeb799821e6ae4e6\",\r\n    \"rua\": \"Rua Exemplo 2 \",\r\n    \"cidade\": \"Cidade Exemplo 2\",\r\n    \"estado\": \"Estado Exemplo 2\",\r\n    \"cep\": \"12345-678\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/endereco/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"endereco",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\": \"64850577aeb799821e6ae4e6\",\r\n    \"rua\": \"Rua Exemplo 2 \",\r\n    \"cidade\": \"Cidade Exemplo 2\",\r\n    \"estado\": \"Estado Exemplo 2\",\r\n    \"cep\": \"12345-678\"\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/endereco/64850577aeb799821e6ae4e6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"endereco",
+								"64850577aeb799821e6ae4e6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta endereco",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/endereco/64850577aeb799821e6ae4e6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"endereco",
+								"64850577aeb799821e6ae4e6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FormaPagamento",
+			"item": [
+				{
+					"name": "Lista_Produtos Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/produto/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostaProduto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Produto Teste 5\",\r\n    \"preco\": 12.50,\r\n    \"isDisponivel\" : true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produto/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Produto Teste 6\",\r\n    \"preco\": 13.50,\r\n    \"isDisponivel\" : false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produto/6484922e04e6cf5a854c7cfc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								"6484922e04e6cf5a854c7cfc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/produto/6484922e04e6cf5a854c7cfc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								"6484922e04e6cf5a854c7cfc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FormaPagamentoUsuario",
+			"item": [
+				{
+					"name": "Lista_Produtos Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/produto/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostaProduto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":\"6484baf4a95485a353794f0b\",\r\n    \"idFormaPagamento\":\"64853c0d10737d2863443a4f\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/formaPagamentoUsuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"formaPagamentoUsuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\" : \"Produto Teste 6\",\r\n    \"preco\": 13.50,\r\n    \"isDisponivel\" : false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produto/6484922e04e6cf5a854c7cfc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								"6484922e04e6cf5a854c7cfc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/produto/6484922e04e6cf5a854c7cfc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produto",
+								"6484922e04e6cf5a854c7cfc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Obtem_usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"principal\",\r\n    \"tipo\": \"Dinheiro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/formaPagamento",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"formaPagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Andre\",\r\n  \"email\": \"Silva1.silva@gmail.com\",\r\n  \"dataNascimento\": \"25/05/1997\",\r\n  \"password\": \"123\",\r\n  \"endereco\": {\r\n    \"rua\": \"Rua Exemplo\",\r\n    \"cidade\": \"Cidade Exemplo\",\r\n    \"estado\": \"Estado Exemplo\",\r\n    \"cep\": \"12345-678\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/register/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Andre0x1\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/login/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criacao com endereco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Andre\",\r\n  \"email\": \"andrel422241521.silva@gmail.com\",\r\n  \"dataNascimento\": \"25/05/1997\",\r\n  \"password\": \"123\",\r\n  \"endereco\": {\r\n    \"rua\": \"Rua Exemplo\",\r\n    \"cidade\": \"Cidade Exemplo\",\r\n    \"estado\": \"Estado Exemplo\",\r\n    \"cep\": \"12345-678\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/login/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "PostaProduto Copy 2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/pedido/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedido",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PedidoProduto",
+			"item": [
+				{
+					"name": "PostaProduto Copy 3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/pedidoProdutos/pedidoproduto/64851d19b75412221dbb514c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidoProdutos",
+								"pedidoproduto",
+								"64851d19b75412221dbb514c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sacola",
+			"item": [
+				{
+					"name": "Lista_Produtos Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/sacola/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sacola",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista_Produtos Copy 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"formaPagamento\" : \"Cartão\",\r\n   \"idEndereco\": \"6484baf4a95485a353794f0f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/sacola/6484bb6ea95485a353794f14/pedido",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"sacola",
+								"6484bb6ea95485a353794f14",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SacolaProduto",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idSacola\": \"6484bb6ea95485a353794f14\",\r\n    \"idProduto\": \"6484bf9bb32dc31d4e5e220c\",\r\n    \"valor\": 10\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/produtosSacola/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtosSacola",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PostaProduto Copy 2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/produtosSacola/produtos/6484bb6ea95485a353794f14",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtosSacola",
+						"produtos",
+						"6484bb6ea95485a353794f14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostaProduto Copy 3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/produtosSacola/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtosSacola",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
