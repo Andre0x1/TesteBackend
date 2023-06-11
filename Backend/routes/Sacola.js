@@ -39,7 +39,7 @@ router.post("/:idSacola/pedido", async (req, res) => {
     const pedido = new Pedido({
       idUsuario: sacola.idUsuario,
       valorTotal: 0,
-      formaPagamento: formaPagamento,
+      formaPagamento: formaPagamento.formaPagamento,
     });
     await pedido.save();
 
@@ -57,12 +57,13 @@ router.post("/:idSacola/pedido", async (req, res) => {
 
     pedido.valorTotal = valorTotal;
     await pedido.save();
-
-    await sacolaProdutos.deleteMany({ idSacola: idSacola });
+    await SacolaProduto.deleteMany({ idSacola: idSacola });
 
     res.status(201).json(pedido);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao criar pedido" });
+    res
+      .status(500)
+      .json({ error: "Erro ao criar pedido", mensagem: error.message });
   }
 });
 

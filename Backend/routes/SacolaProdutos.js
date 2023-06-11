@@ -4,73 +4,76 @@ const SacolaProdutos = require("../models/SacolaProdutos/SacolaProdutos");
 
 router.post("/", async (req, res) => {
   try {
-    const { idLista, idProduto, valor } = req.body;
-    const count = await SacolaProdutos.countDocuments({ idLista });
+    const { idSacola, idProduto, valor } = req.body;
+    const id = idSacola;
     const tamanhoMaximo = 3;
+    const count = await SacolaProdutos.countDocuments({ idSacola: id });
 
     if (count >= tamanhoMaximo) {
       return res.status(400).json({ error: "A sacola está cheia" });
     }
 
-    const newItem = new SacolaProdutos({ idLista, idProduto, valor });
+    const newItem = new SacolaProdutos({ idSacola, idProduto, valor });
     await newItem.save();
     res.status(201).json(newItem);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao adicionar produto à lista" });
+    res.status(500).json({
+      error: "Erro ao adicionar produto à sacola",
+    });
   }
 });
 
 router.get("/", async (req, res) => {
   try {
-    const Listas = await SacolaProdutos.find();
-    res.json(Listas);
+    const Sacolas = await SacolaProdutos.find();
+    res.json(Sacolas);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter Listas" });
+    res.status(500).json({ error: "Erro ao obter Sacolas" });
   }
 });
 
-router.get("/produtos/:idLista", async (req, res) => {
+router.get("/produtos/:idSacola", async (req, res) => {
   try {
-    const idLista = req.params.id;
-    const Listas = await SacolaProdutos.find({ idLista: idLista });
-    res.json(Listas);
+    const idSacola = req.params.id;
+    const Sacolas = await SacolaProdutos.find({ idSacola: idSacola });
+    res.json(Sacolas);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter produtos da lista" });
+    res.status(500).json({ error: "Erro ao obter produtos da sacola" });
   }
 });
 
 router.get("/:id", async (req, res) => {
   try {
-    const lista = await SacolaProdutos.findById(req.params.id);
+    const sacola = await SacolaProdutos.findById(req.params.id);
 
-    if (!lista) {
-      return res.status(404).json({ error: "Lista não encontrada" });
+    if (!sacola) {
+      return res.status(404).json({ error: "Sacola não encontrada" });
     }
 
-    res.json(lista);
+    res.json(sacola);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter lista" });
+    res.status(500).json({ error: "Erro ao obter sacola" });
   }
 });
 
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { idLista, idProduto, valor } = req.body;
+  const { idSacola, idProduto, valor } = req.body;
 
   try {
-    const lista = await SacolaProdutos.findByIdAndUpdate(
+    const sacola = await SacolaProdutos.findByIdAndUpdate(
       id,
-      { idLista, idProduto, valor },
+      { idSacola, idProduto, valor },
       { new: true }
     );
 
-    if (!lista) {
-      return res.status(404).json({ error: "Lista não encontrada" });
+    if (!sacola) {
+      return res.status(404).json({ error: "Sacola não encontrada" });
     }
 
-    res.json(lista);
+    res.json(sacola);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao atualizar lista" });
+    res.status(500).json({ error: "Erro ao atualizar sacola" });
   }
 });
 
@@ -78,15 +81,15 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const lista = await SacolaProdutos.findByIdAndDelete(id);
+    const sacola = await SacolaProdutos.findByIdAndDelete(id);
 
-    if (!lista) {
-      return res.status(404).json({ error: "Lista não encontrada" });
+    if (!sacola) {
+      return res.status(404).json({ error: "Sacola não encontrada" });
     }
 
-    res.json({ message: "Lista excluída com sucesso" });
+    res.json({ message: "Sacola excluída com sucesso" });
   } catch (error) {
-    res.status(500).json({ error: "Erro ao excluir lista" });
+    res.status(500).json({ error: "Erro ao excluir sacola" });
   }
 });
 
